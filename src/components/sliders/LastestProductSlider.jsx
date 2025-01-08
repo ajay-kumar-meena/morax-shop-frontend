@@ -64,7 +64,7 @@ const LastestProductSlider = () => {
 
             {loading && latestproducts.length === 0 ?
                 (
-                    <div> Product Not found </div>
+                    <div> Products Not found </div>
                 ):
                 (<div className="mt-1">
                     <Slider {...sliderSettings}>

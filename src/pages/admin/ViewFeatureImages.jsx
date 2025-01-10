@@ -32,6 +32,7 @@ function ViewFeatureImages() {
         } else {
           toast.error('Something Went Wrong, Try Again');
         }
+        console.log(data)
       });
   };
 
@@ -48,7 +49,7 @@ function ViewFeatureImages() {
                 <FeatureImageCard
                   key={image._id}
                   imageId={image._id}
-                  image={image.url}
+                  image={image.image.url}
                   removeHandler={handleDeleteImage}
                 />
               ))}

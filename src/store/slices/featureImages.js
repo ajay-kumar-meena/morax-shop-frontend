@@ -1,6 +1,8 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+import { SERVER } from '../../config/config.js';
+
 
 // Initial state
 const initialState = {
@@ -13,7 +15,7 @@ export const addFeatureImage = createAsyncThunk(
   "featureimage/add",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:3000/api/v1/featureimages/add",
+      `${SERVER}/api/v1/featureimages/add`,
       formData, // Pass formData directly, not inside an object
       {
         withCredentials: true,
@@ -25,22 +27,26 @@ export const addFeatureImage = createAsyncThunk(
 );
 
 
-export const getFeatureImages = createAsyncThunk("featureimage/get", async () => {
-  const response = await axios.get(`http://localhost:3000/api/v1/featureimages/get`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    });
-  return response.data;
-});
+export const getFeatureImages = createAsyncThunk(
+  "featureimage/get",
+  async () => {
+    const response = await axios.get(`${SERVER}/api/v1/featureimages/get`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+    return response.data;
+  });
+
+
 
 export const deleteFeatureImage = createAsyncThunk(
-  "cart/deleteCartItem",
-  async (featureImageId) => {
+  "cart/delete",
+   async (id) => {
     const response = await axios.delete(
-      `http://localhost:3000/api/v1/featureimages/${featureImageId}`,
+      `${SERVER}/api/v1/featureimages/${id}`,
       {
         headers: {
           'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ import DashboardNavbar from '../../components/admin/DashboardNavbar';
 import { useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
 import { addNewProduct } from '../../store/slices/admin/AdminProduct.js';
-import { useSelector } from 'react-redux';
+import { brands, categories } from '../../config/config.js'; // Brands and categories arrays
 
 const initialProductValue = { 
   name: '',
@@ -17,7 +17,7 @@ const initialProductValue = {
 
 const AddProduct = () => {
   const [product, setProduct] = useState(initialProductValue);
-  const [isSubmitting,setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
 
@@ -53,19 +53,16 @@ const AddProduct = () => {
     setIsSubmitting(true);
 
     // Dispatch the async thunk
-    dispatch(
-      addNewProduct(formData)
-    ).then((response) => {
-        if (response.payload?.success) {
-          setProduct(initialProductValue);
-          setImage(null);
-          toast.success('Product added successfully!');
-        }
-        else {
-          toast.error('Failed to add product');
-        }
-        setIsSubmitting(false);
-      })
+    dispatch(addNewProduct(formData)).then((response) => {
+      if (response.payload?.success) {
+        setProduct(initialProductValue);
+        setImage(null);
+        toast.success('Product added successfully!');
+      } else {
+        toast.error('Failed to add product');
+      }
+      setIsSubmitting(false);
+    });
   };
 
   return (
@@ -134,17 +131,27 @@ const AddProduct = () => {
                   required
                 />
               </div>
+              
+              {/* Brand Selection (Dropdown with only brand name) */}
               <div>
                 <label className="block text-gray-700">Brand:</label>
-                <input
-                  type="text"
+                <select
                   name="brand"
                   value={product.brand}
                   onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded"
                   required
-                />
+                >
+                  <option value="">Select Brand</option>
+                  {brands.map((brand, index) => (
+                    <option key={index} value={brand.name}>
+                      {brand.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* Stock */}
               <div>
                 <label className="block text-gray-700">Stock:</label>
                 <input
@@ -156,17 +163,27 @@ const AddProduct = () => {
                   required
                 />
               </div>
+
+              {/* Category Selection (Dropdown with only category name) */}
               <div>
                 <label className="block text-gray-700">Category:</label>
-                <input
-                  type="text"
+                <select
                   name="category"
                   value={product.category}
                   onChange={handleChange}
                   className="w-full p-2 border border-gray-300 rounded"
                   required
-                />
+                >
+                  <option value="">Select Category</option>
+                  {categories.map((category, index) => (
+                    <option key={index} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* Description */}
               <div>
                 <label className="block text-gray-700">Description:</label>
                 <textarea
@@ -179,19 +196,17 @@ const AddProduct = () => {
                 />
               </div>
 
-              {
-                isSubmitting ? <div className='text-center'> submiting product ...</div>
-                :
-                (
-                  <button
+              {/* Submit Button */}
+              {isSubmitting ? (
+                <div className='text-center'>Submitting product...</div>
+              ) : (
+                <button
                   type="submit"
                   className="bg-blue-500 text-white py-2 px-4 rounded w-full hover:bg-blue-600 transition"
                 >
                   Add Product
                 </button>
-                )
-              }
-             
+              )}
             </form>
           </div>
         </div>

@@ -25,7 +25,7 @@ const Search = () => {
   useEffect(()=>{   
     console.log("state product list: "+ productList)
     const fetchProducts = ()=>{
-      dispatch(fetchAllFilteredProducts({search,price:maxPrice,brand,sort,page}))
+      dispatch(fetchAllFilteredProducts({search,price:maxPrice,brand: brand.toLowerCase(),sort,page}))
     }
     const fetchProudctId = setTimeout(fetchProducts,1000) ;
   
@@ -87,7 +87,7 @@ const Search = () => {
             <option value="">ALL</option>
             {Array.from(new Set(brands.map(brands => brands.name))).map((brand) => (
               <option key={brand} value={brand}>
-                {brand.toUpperCase()}
+                {brand}
               </option>
             ))}
           </select>

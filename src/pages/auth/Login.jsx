@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
 import { userExist, userNotExist } from '../../store/slices/auth';
+import { SERVER } from '../../config/config.js'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ const Login = () => {
     };
     
     try {
-      const response = await axios.post('http://localhost:3000/api/v1/user/login', 
+      const response = await axios.post(`${SERVER}/api/v1/user/login`, 
         body, 
         {
             headers: {

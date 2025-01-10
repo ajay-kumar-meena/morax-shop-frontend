@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { SERVER } from '../../../config/config.js'
 
 const initialState = {
   isLoading: false,
@@ -13,7 +14,7 @@ export const makeAdmin = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const result = await axios.post(
-        `http://localhost:3000/api/v1/user/makeadmin/${userId}`,
+        `${SERVER}/api/v1/user/makeadmin/${userId}`,
         null,
         {
           withCredentials: true,
@@ -33,7 +34,7 @@ export const fetchAllUsers = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const result = await axios.get(
-        "http://localhost:3000/api/v1/user/all",
+        `${SERVER}/api/v1/user/all`,
         {
           withCredentials: true,
           headers: {
@@ -55,7 +56,7 @@ export const deleteUser = createAsyncThunk(
   async (userId, { rejectWithValue }) => {
     try {
       const result = await axios.delete(
-        `http://localhost:3000/api/v1/user/${userId}`,
+        `${SERVER}/api/v1/user/${userId}`,
         {
           withCredentials: true,
           headers: {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { SERVER } from "../../config/config";
 
 
 // Initial state
@@ -18,7 +19,7 @@ export const makeOrder = createAsyncThunk(
     "cart/makeOrder",
     async ({ shippingInfo, user, subtotal, shippingCharges, tax, total, orderItems }) => {
         const response = await axios.post(
-            "http://localhost:3000/api/v1/order/new",
+            `${SERVER}/api/v1/order/new`,
             {
                shippingInfo,
                user,
@@ -41,7 +42,7 @@ export const makeOrder = createAsyncThunk(
 );
 
 export const fetchOrders = createAsyncThunk("cart/fetchOrders", async (userId) => {
-    const response = await axios.get(`http://localhost:3000/api/v1/order/my/?id=${userId}`,
+    const response = await axios.get(`${SERVER}/api/v1/order/my/?id=${userId}`,
         {
         headers: {
             'Content-Type': 'application/json',
@@ -51,22 +52,6 @@ export const fetchOrders = createAsyncThunk("cart/fetchOrders", async (userId) =
     return response.data;
 });
 
-// export const changeStatusOrder = createAsyncThunk(
-//     "cart/changeStatusOrder",
-//     async (orderId) => {
-//         const response = await axios.put(
-//             `http://localhost:3000/api/v1/order/${orderId}`,
-//              null,
-//             {
-//                 headers: {
-//                     'Content-Type': 'application/json',
-//                 },
-//                 withCredentials: true,
-//             }
-//         );
-//         return response?.data;
-//     }
-// );
 
 
 export const changeStatusOrder = createAsyncThunk(
@@ -74,7 +59,7 @@ export const changeStatusOrder = createAsyncThunk(
     async (orderId, { rejectWithValue }) => {
         try {
             const response = await axios.put(
-                `http://localhost:3000/api/v1/order/${orderId}`,
+                `${SERVER}/api/v1/order/${orderId}`,
                 { status: 'Shipped' }, // Replace 'Shipped' with your desired payload
                 {
                     headers: {
@@ -97,7 +82,7 @@ export const cancelOrder = createAsyncThunk(
     "cart/cancelOrder",
     async (orderId) => {
         const response = await axios.delete(
-            `http://localhost:3000/api/v1/order/${orderId}`,
+            `${SERVER}/api/v1/order/${orderId}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -112,7 +97,7 @@ export const getLastOrder = createAsyncThunk(
     "cart/getLastOrder",
     async (userId) => {
         const response = await axios.get(
-            `http://localhost:3000/api/v1/order/lastorder/${userId}`,
+            `${SERVER}/api/v1/order/lastorder/${userId}`,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -129,7 +114,7 @@ export const fetchAllOrders = createAsyncThunk(
     "cart/fetchAllOrders",
     async () => {
         const response = await axios.get(
-            `http://localhost:3000/api/v1/order/all`,
+            `${SERVER}/api/v1/order/all`,
             {
                 headers: {
                     'Content-Type': 'application/json',

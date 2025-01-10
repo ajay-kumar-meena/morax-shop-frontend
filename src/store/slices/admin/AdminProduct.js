@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+import { SERVER } from '../../../config/config.js'
+
 const initialState = {
   isLoading: false,
   productList: [],
@@ -11,7 +13,7 @@ export const addNewProduct = createAsyncThunk(
   "/product/new",
   async (formData) => {
     const result = await axios.post(
-      "http://localhost:3000/api/v1/product/new",
+      `${SERVER}/api/v1/product/new`,
       formData,
       {
         withCredentials: true,
@@ -26,7 +28,7 @@ export const fetchAllProducts = createAsyncThunk(
   "/products/fetchAllProducts",
   async () => {
     const result = await axios.get(
-      "http://localhost:3000/api/v1/product/admin-products",
+      `${SERVER}/api/v1/product/admin-products`,
       {
         withCredentials: true,
         headers: {
@@ -44,7 +46,7 @@ export const fetchAllProducts = createAsyncThunk(
 //   "/products/editProduct",
 //   async ({ id, formData }) => {
 //     const result = await axios.put(
-//       `http://localhost:3000/api/admin/products/edit/${id}`,
+//       `${SERVER}/api/admin/products/edit/${id}`,
 //       formData,
 //       {
 //         headers: {
@@ -61,7 +63,7 @@ export const deleteProduct = createAsyncThunk(
   "/products/deleteProduct",
   async (id) => {
     const result = await axios.delete(
-      `http://localhost:3000/api/v1/product/${id}`,
+      `${SERVER}/api/v1/product/${id}`,
       {
           withCredentials: true,
           headers: {

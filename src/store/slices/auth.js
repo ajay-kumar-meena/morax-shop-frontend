@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios';
-
+import { SERVER } from '../../config/config.js'
 
 const initialState = {
      user:null,
@@ -12,7 +12,7 @@ export const signUp = createAsyncThunk(
   "user/signup",
   async (formData) => {
     const response = await axios.post(
-      "http://localhost:3000/api/v1/user/register",
+      `${SERVER}/api/v1/user/register`,
       formData,
       {
         withCredentials: true,

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { SERVER } from '../../config/config.js'
 
 // Helper functions
 const calculateSubtotal = (items) => {
@@ -12,7 +13,7 @@ const calculateSubtotal = (items) => {
   return 0;
 };
 
-const calculateTax = (subtotal, taxRate = 30) => (subtotal * taxRate) / 100;
+const calculateTax = (subtotal, taxRate = 19) => (subtotal * taxRate) / 100;
 const calculateTotal = (subtotal, tax, shippingCharge) => subtotal + tax + shippingCharge;
 
 // Initial state
@@ -31,7 +32,7 @@ export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {
     const response = await axios.post(
-      "http://localhost:3000/api/v1/cart/add",
+      `${SERVER}/api/v1/cart/add`,
       { userId, productId, quantity },
       { withCredentials: true,
         headers: { "Content-Type": "application/json" }
@@ -42,7 +43,7 @@ export const addToCart = createAsyncThunk(
 );
 
 export const fetchCartItems = createAsyncThunk("cart/fetchCartItems", async (userId) => {
-  const response = await axios.get(`http://localhost:3000/api/v1/cart/get/${userId}`, {
+  const response = await axios.get(`${SERVER}/api/v1/cart/get/${userId}`, {
     withCredentials: true,
   });
   return response.data;
@@ -51,7 +52,7 @@ export const deleteCartItem = createAsyncThunk(
   "cart/deleteCartItem",
   async ({ productId, userId }) => {
     const response = await axios.delete(
-      `http://localhost:3000/api/v1/cart/${userId}/${productId}`,
+      `${SERVER}/api/v1/cart/${userId}/${productId}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +68,7 @@ export const destroyCart = createAsyncThunk(
   "cart/destroyCart",
   async (userId) => {
     const response = await axios.delete(
-      `http://localhost:3000/api/v1/cart/destory/${userId}}`,
+      `${SERVER}/api/v1/cart/destory/${userId}}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ export const updateCartQuantity = createAsyncThunk(
   "cart/updateCartQuantity",
   async ({ productId, userId, quantity }) => {
     const response = await axios.put(
-      "http://localhost:3000/api/v1/cart/update-cart",
+      `${SERVER}/api/v1/cart/update-cart`,
       { productId, quantity, userId },
       { withCredentials: true }
     );

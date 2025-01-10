@@ -10,6 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { userExist, userNotExist } from './store/slices/auth.js';
+import { SERVER } from "../config/config";
 
 
 // import components
@@ -54,7 +55,7 @@ const  App = ()=>{
   useEffect(()=>{
       const fetchUser = async ()=>{
         try{
-          const { data } = await axios.get('http://localhost:3000/api/v1/user/me',{
+          const { data } = await axios.get(`${SERVER}/api/v1/user/me`,{
               headers: {
                   'Content-Type': 'application/json',
               },

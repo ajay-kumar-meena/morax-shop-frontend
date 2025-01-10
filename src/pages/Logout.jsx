@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
+import { SERVER } from "../config/config";
+
 
 function Logout() {
     const dispatch = useDispatch();
@@ -12,7 +14,7 @@ function Logout() {
 
     useEffect(() => {
         const logoutUser = async () => {
-            const res = await axios.get(`http://localhost:3000/api/v1/user/logout`,
+            const res = await axios.get(`${SERVER}/api/v1/user/logout`,
                 {
                     withCredentials: true,
                 }

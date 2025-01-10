@@ -15,10 +15,11 @@ const initialShippingForm = {
 }
 function ShippingForm() {
   const [shippingFormData, setShippingFormData] = useState(initialShippingForm);
-   const dispatch = useDispatch();
-   const { cartItems, subtotal, shippingCharges, tax, total } = useSelector((state) => state.cart);
-   const { user }  =  useSelector(state => state.auth);
-   const userId = user._id;
+  const [isSubmiting, setisSubmiting] = useState(false);
+  const dispatch = useDispatch();
+  const { cartItems, subtotal, shippingCharges, tax, total } = useSelector((state) => state.cart);
+  const { user }  =  useSelector(state => state.auth);
+  const userId = user._id;
 
   const handleChange = (e) => {
     setShippingFormData({
@@ -43,6 +44,8 @@ function ShippingForm() {
         toast.error("Pin code must be 6 digit")
         return;
     }
+
+    setisSubmiting(true);
 
     dispatch(makeOrder({
         shippingInfo : shippingFormData,
@@ -194,9 +197,10 @@ function ShippingForm() {
 
       <button
         type="submit"
+        disabled={isSubmiting}
         className="w-full bg-gray-700  hover:bg-gray-500 text-white font-bold py-2 px-4 rounded"
       >
-        Shipping Order
+       {!isSubmiting ? ' Shipping Order' : 'Processing....' }
       </button>
     </form>
   );

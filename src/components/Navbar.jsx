@@ -14,7 +14,7 @@ function Navbar() {
   };
 
   return (
-    <header className="text-slate-700 container relative mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center sm:h-3/4">
+    <header className="text-slate-700 container relative mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center">
       <a href="/" className="flex items-center whitespace-nowrap text-2xl font-black">
         <span className="mr-2 w-8">
           <div className="text-blue-600 font-bold text-2xl">

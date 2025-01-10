@@ -10,7 +10,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { userExist, userNotExist } from './store/slices/auth.js';
-import { SERVER } from "../config/config.js";
+import { SERVER } from './config/config.js';
 
 
 // import components
@@ -51,7 +51,7 @@ const  App = ()=>{
 
   const {user,isAuthenticated} = useSelector(state=>state.auth);
   const dispatch = useDispatch();
-  console.log("Server is : "+ SERVER)
+  console.log("Server is : " + SERVER)
   useEffect(()=>{
       const fetchUser = async ()=>{
         try{

@@ -23,7 +23,6 @@ const Search = () => {
 
   // useEffect for change of search,sort,price,cate
   useEffect(()=>{   
-    console.log("state product list: "+ productList)
     const fetchProducts = ()=>{
       dispatch(fetchAllFilteredProducts({search,price:maxPrice,brand: brand.toLowerCase(),sort,page}))
     }

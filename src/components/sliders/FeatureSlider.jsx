@@ -11,21 +11,19 @@ const FeatureSlider = ({ images }) => {
     slidesToScroll: 1,
   };
 
-  console.log("iamges in feature : "+ Array.from(images))
-
   return (
     <>
       {images.length > 1 ? (
-        <div className="w-[100%] mx-auto">
+        <div className="w-[100%] mx-auto h-3/6">
           <div className="mt-1">
             <Slider {...settings}>
               {images.map((d) => (
                 <div key={d.image.url} className="bg-white text-black rounded-xl">
                   {/* Image section */}
-                  <div className="h-56 bg-indigo-500 flex justify-center items-center rounded-t-xl">
+                  <div className="h-70 bg-indigo-500 flex justify-center items-center rounded-t-xl">
                     <img
                       src={d.image.url}
-                      className="h-44 w-44 rounded-full"
+                      className="h-full w-full"
                       alt="slider-img"
                     />
                   </div>

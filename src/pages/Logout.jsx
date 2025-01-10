@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-import { SERVER } from "../config/config";
+import { SERVER } from "../config/config.js";
 
 
 function Logout() {
@@ -28,11 +28,10 @@ function Logout() {
         logoutUser();
     });
 
-    return 
-    (<>
+    return (<>
      <div>This is Logout Page</div>
      </>)
 
 }
 
-export default Logout
+export default Logout;

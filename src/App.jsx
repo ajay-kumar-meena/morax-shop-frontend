@@ -51,7 +51,7 @@ const  App = ()=>{
 
   const {user,isAuthenticated} = useSelector(state=>state.auth);
   const dispatch = useDispatch();
-  console.log("Server is : " + SERVER)
+  
   useEffect(()=>{
       const fetchUser = async ()=>{
         try{

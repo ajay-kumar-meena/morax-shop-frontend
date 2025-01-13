@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { sliderSettings } from '../../config/config.js'
 import { brands } from '../../config/config.js'
+import { Link } from 'react-router-dom'
 
 const ProductBrandSlider = () => {
    
@@ -20,9 +21,11 @@ const ProductBrandSlider = () => {
                            <p className="text-xl font-semibold">{brand.name}</p>
                            
                            {/* Styled Button */}
-                           <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg px-6 py-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+                           <Link
+                           to={`/search?brand=${brand.name}`}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white text-lg px-6 py-2 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
                                View More
-                           </button>
+                           </Link>
                        </div>
                    </div>   
                     ))}

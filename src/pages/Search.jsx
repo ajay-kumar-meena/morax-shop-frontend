@@ -6,17 +6,21 @@ import { brands } from "../config/config.js"
 import { useDispatch , useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Loader from "../components/Loader.jsx";
+import {  useLocation } from 'react-router-dom'
 const Search = () => {
   
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const queryBrand  = queryParams.get('brand');
   const { productList, isLoading, totalPage,error } = useSelector(state=> state.product);
-
-
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
-  const [maxPrice, setMaxPrice] = useState(10000);
-  const [brand, setBrand] = useState("");
+  const [maxPrice, setMaxPrice] = useState(200000);
+  const [brand, setBrand] = useState(`${queryBrand}`);
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
+  
+  
 
 
  
@@ -115,9 +119,9 @@ const Search = () => {
                key={_id}
                productId={_id}
                image={photos[0].url}
-               name={name}
+               name={`${name.substring(0,15)}...`}
                salePrice={salePrice}
-               description={description}
+               description={`${description.substring(20)}...`}
                originalPrice={price}
              />
           ))}

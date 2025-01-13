@@ -18,7 +18,7 @@ function ProductDetails() {
       if (data?.payload?.success) {
         setProduct(data.payload.product);
       } else {
-        toast.error("SomeThing went to load product")
+        toast.error("SomeThing went wrong to load product")
       }
     });
   };
@@ -35,7 +35,7 @@ function ProductDetails() {
   // Destructure product
   const {
     _id,
-    photos = [], // Default to an empty array if photos is undefined
+    photos = [], // Default to an empty array if 
     name = "Unknown Product",
     brand = "Unknown Brand",
     price = 0,

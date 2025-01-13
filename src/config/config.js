@@ -31,7 +31,8 @@ const sliderSettings = {
 
 
 
-export const SERVER = "https://morax-shop-backend.onrender.com"
+export const SERVER = "https://morax-shop-backend.onrender.com";
+// export const SERVER = "http://localhost:3000";
 
 
 

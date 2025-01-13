@@ -22,7 +22,9 @@ const LastestProductSlider = () => {
     const[loading,setLoading] = useState(true);
     const dispatch = useDispatch();
     const { user } = useSelector(state=> state.auth);
-    
+    sliderSettings.slidesToShow = 4;
+    sliderSettings.slidesToScroll = 4;
+
     const addCartHandler = async(productId, quantity) => {
         
        if(user){
@@ -72,12 +74,12 @@ const LastestProductSlider = () => {
                             <ProductCard
                                 key={_id}
                                 productId={_id}
-                                name={name}
-                                image={photos[0]?.url} // Ensure photos[0] exists
+                                name={`${name.substring(0,35)} ....`}
+                                image={photos[0]?.url} 
                                 stock={stock}
                                 salePrice={salePrice}
                                 price={price}
-                                description={description}
+                                description={`${description.substring(0,20)} ...`}
                                 addCartHandler={addCartHandler}
                             />
                         ))}

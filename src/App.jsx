@@ -51,6 +51,10 @@ const  App = ()=>{
 
   const {user,isAuthenticated} = useSelector(state=>state.auth);
   const dispatch = useDispatch();
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 48a382b86759069a7b2e8706cf0e243aaa015584
   useEffect(()=>{
       const fetchUser = async ()=>{
         try{
